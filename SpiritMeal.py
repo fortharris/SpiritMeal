@@ -27,8 +27,8 @@ new_books = ["Matthew", "Mark", "Luke", "John", "Acts", "Romans",
             "James", "1 Peter", "2 Peter", "1 John", "2 John", "3 John",
             "Jude", "Revelation"]
 new_chapters = [
-    28, 16, 24, 21, 28, 16, 16, 13, 6, 6, 4, 4, 5, 3, 6, 4, 3, 1, 13,
-    5, 5, 3, 5, 1, 1, 1, 22]
+                28, 16, 24, 21, 28, 16, 16, 13, 6, 6, 4, 4, 5, 3, 6, 4, 3, 1, 13,
+                5, 5, 3, 5, 1, 1, 1, 22]
 
 
 class SearchThread(QtCore.QThread):
@@ -271,11 +271,6 @@ class SpiritMeal(QtGui.QWidget):
         file.close()
         self.settings = dict(tempList)
 
-        self.dictionary = Dictionary(self)
-        self.dictionary.setMinimumHeight(250)
-        self.dictionary.setMaximumWidth(300)
-        self.dictionary.hide()
-
         data = QtGui.QFontDatabase()
         data.addApplicationFont("Resources\\Fonts\\papyrus.ttf")
         data.addApplicationFont("Resources\\Fonts\\droidsans_final_fixed.ttf")
@@ -303,7 +298,10 @@ class SpiritMeal(QtGui.QWidget):
         hbox = QtGui.QHBoxLayout()
         dictLayout.addLayout(hbox)
         
+        self.dictionary = Dictionary(self)
+        self.dictionary.setMaximumWidth(300)
         hbox.addWidget(self.dictionary)
+        
         dictLayout.addStretch(1)
 
         self.searchWidget = SearchWidget()
@@ -683,14 +681,13 @@ class SpiritMeal(QtGui.QWidget):
             main.loadVerses()
 
     def showDictionary(self):
-        if self.dictionary.isVisible():
-            self.dictionary.hide()
-        else:
+        if self.dictionary.minimumHeight() == 0:
             selected_text = self.getSelectedText()
-
             if selected_text != '':
                 self.dictionary.loadSelectedText(selected_text)
             self.dictionary.show()
+        else:
+            self.dictionary.hide()
 
 
 app = QtGui.QApplication(sys.argv)
