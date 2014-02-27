@@ -5,24 +5,20 @@ class Dictionary(QtGui.QLabel):
     def __init__(self, parent):
         QtGui.QLabel.__init__(self, parent)
 
-        self.resize(550, 350)
         self.setWindowTitle('King James Dictionary')
         self.setObjectName("containerLabel")
         self.setStyleSheet("""
 
-                            QLabel#containerLabel { border-left: 1px solid #E2BC8F;
-                                                   border-right: 1px solid #E2BC8F;
-                                                   border-bottom: 1px solid #E2BC8F;
-                                                   background: #F0F0F0;
+                            QLabel#containerLabel { border-left: 1px solid #3199D1;
+                                                   border-right: 1px solid #3199D1;
+                                                   border-bottom: 1px solid #3199D1;
+                                                   background: white;
                                                    }
 
                             """)
 
         self.wordList = []
         appFont = QtGui.QFont("Segoe UI", 10)
-        
-        self.setBackgroundRole(QtGui.QPalette.Background)
-        self.setAutoFillBackground(True)
         
         self.setMaximumHeight(300)
         self.setMinimumWidth(550)
@@ -63,12 +59,12 @@ class Dictionary(QtGui.QLabel):
         
         self.easingCurve = QtCore.QEasingCurve.OutCubic
 
-        self.showAnimation = QtCore.QPropertyAnimation(self, 'minimumHeight')
+        self.showAnimation = QtCore.QPropertyAnimation(self, 'minimumWidth')
         self.showAnimation.setDuration(200)
-        self.showAnimation.setEndValue(250)
+        self.showAnimation.setEndValue(550)
         self.showAnimation.setEasingCurve(self.easingCurve)
 
-        self.hideAnimation = QtCore.QPropertyAnimation(self, 'minimumHeight')
+        self.hideAnimation = QtCore.QPropertyAnimation(self, 'minimumWidth')
         self.hideAnimation.setDuration(200)
         self.hideAnimation.setEndValue(0)
         self.hideAnimation.setEasingCurve(self.easingCurve)

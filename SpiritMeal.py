@@ -283,7 +283,7 @@ class SpiritMeal(QtGui.QWidget):
         self.bookWidget.setStyleSheet("""                     
                                 QWidget {
                                 selection-color: black;
-                                selection-background-color: rgba(0, 0, 0, 50);
+                                selection-background-color: #00BC44;
                             } """)
         self.bookWidget.setReadOnly(True)
         self.bookWidget.setFont(QtGui.QFont(self.settings["FontName"],
@@ -299,8 +299,10 @@ class SpiritMeal(QtGui.QWidget):
         dictLayout.addLayout(hbox)
         
         self.dictionary = Dictionary(self)
-        self.dictionary.setMaximumWidth(300)
+        self.dictionary.setMaximumWidth(0)
+        self.dictionary.setMinimumHeight(250)
         hbox.addWidget(self.dictionary)
+        self.dictionary.hide()
         
         dictLayout.addStretch(1)
 
@@ -315,7 +317,7 @@ class SpiritMeal(QtGui.QWidget):
         self.menuLabel.setMinimumHeight(40)
         self.menuLabel.setMaximumHeight(40)
         self.menuLabel.setScaledContents(True)
-        self.menuLabel.setPixmap(QtGui.QPixmap("Resources\\Icons\\Wood 2"))
+        self.menuLabel.setStyleSheet("background: white;")
 
         menuLayout = QtGui.QHBoxLayout()
 
@@ -398,6 +400,12 @@ class SpiritMeal(QtGui.QWidget):
         self.menuLabel.setLayout(menuLayout)
 
         bookLayout.addWidget(self.menuLabel)
+        
+        separatorLabel = QtGui.QLabel()
+        separatorLabel.setMaximumHeight(5)
+        separatorLabel.setStyleSheet("background: #3199D1;")
+        bookLayout.addWidget(separatorLabel)
+        
         bookLayout.addWidget(self.bookWidget)
 
         mainLayout.addLayout(bookLayout)
@@ -681,7 +689,7 @@ class SpiritMeal(QtGui.QWidget):
             main.loadVerses()
 
     def showDictionary(self):
-        if self.dictionary.minimumHeight() == 0:
+        if self.dictionary.minimumWidth() == 0:
             selected_text = self.getSelectedText()
             if selected_text != '':
                 self.dictionary.loadSelectedText(selected_text)
@@ -699,7 +707,7 @@ app.setStyleSheet("""
                             }
 
                      QComboBox {
-                         color: white;
+                         color: black;
                          border: none;
                          border-bottom: 1px solid black;
                          border-radius: 0px;
@@ -815,7 +823,7 @@ app.setStyleSheet("""
                         color: black;
                         border: none;
                         border-left: 1px solid lightgrey;
-                        background: #FFFECB;
+                        background: white;
                     }
 
 
